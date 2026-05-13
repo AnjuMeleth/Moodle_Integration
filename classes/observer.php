@@ -16,13 +16,6 @@ defined('MOODLE_INTERNAL') || die();
 
 class observer {
 
-    private static $server_urls = [
-        'apac'      => 'https://apac.platform.certifyme.dev/api/v2/credential',
-        'eu2'       => 'https://eu2.certifyme.org/api/v2/credential',
-        'us1'       => 'https://us1.certifyme.org/api/v2/credential',
-        'butterfly' => 'https://butterfly.certifyme.org/api/v2/credential',
-    ];
-
     public static function course_completed(\core\event\course_completed $event) {
 
         $server     = get_config('local_certifyme', 'server');
@@ -34,7 +27,7 @@ class observer {
             return;
         }
 
-        $endpoint = self::$server_urls[$server] ?? self::$server_urls['apac'];
+        $endpoint = servers::endpoint($server);
 
         $userid   = $event->relateduserid;
         $courseid = $event->courseid;

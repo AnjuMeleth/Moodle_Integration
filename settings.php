@@ -19,18 +19,13 @@ if ($hassiteconfig) {
     );
     $ADMIN->add('localplugins', $settings);
 
-    // SERVER SELECTOR
+    // SERVER SELECTOR — list is driven by classes/servers.php
     $settings->add(new admin_setting_configselect(
         'local_certifyme/server',
         get_string('server', 'local_certifyme'),
         get_string('server_desc', 'local_certifyme'),
-        'apac',
-        [
-            'apac'      => 'APAC  (https://apac.platform.certifyme.dev)',
-            'eu2'       => 'EU2   (https://eu2.certifyme.org)',
-            'us1'       => 'US1   (https://us1.certifyme.org)',
-            'butterfly' => 'Butterfly  (https://butterfly.certifyme.org)',
-        ]
+        \local_certifyme\servers::default_key(),
+        \local_certifyme\servers::dropdown()
     ));
 
     // API TOKEN
