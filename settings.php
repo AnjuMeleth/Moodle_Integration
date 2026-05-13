@@ -19,7 +19,10 @@ if ($hassiteconfig) {
     );
     $ADMIN->add('localplugins', $settings);
 
-    // SERVER SELECTOR — list is driven by classes/servers.php
+    // -------------------------------------------------------------------------
+    // CONNECTION
+    // -------------------------------------------------------------------------
+
     $settings->add(new admin_setting_configselect(
         'local_certifyme/server',
         get_string('server', 'local_certifyme'),
@@ -28,7 +31,6 @@ if ($hassiteconfig) {
         \local_certifyme\servers::dropdown()
     ));
 
-    // API TOKEN
     $settings->add(new admin_setting_configtext(
         'local_certifyme/apitoken',
         get_string('apitoken', 'local_certifyme'),
@@ -36,11 +38,63 @@ if ($hassiteconfig) {
         ''
     ));
 
-    // TEMPLATE ID
     $settings->add(new admin_setting_configtext(
         'local_certifyme/templateid',
         get_string('templateid', 'local_certifyme'),
         get_string('templateid_desc', 'local_certifyme'),
+        ''
+    ));
+
+    // -------------------------------------------------------------------------
+    // STANDARD API FIELDS
+    // -------------------------------------------------------------------------
+
+    // text — free label shown on the credential (e.g. job title, organisation)
+    $settings->add(new admin_setting_configtext(
+        'local_certifyme/text',
+        get_string('text', 'local_certifyme'),
+        get_string('text_desc', 'local_certifyme'),
+        ''
+    ));
+
+    // verify_mode — must match one of the four values CertifyMe accepts
+    $settings->add(new admin_setting_configselect(
+        'local_certifyme/verify_mode',
+        get_string('verify_mode', 'local_certifyme'),
+        get_string('verify_mode_desc', 'local_certifyme'),
+        'None',
+        [
+            'None'            => get_string('verify_mode_none', 'local_certifyme'),
+            'SSN'             => get_string('verify_mode_ssn', 'local_certifyme'),
+            'Code'            => get_string('verify_mode_code', 'local_certifyme'),
+            'Passport Number' => get_string('verify_mode_passport', 'local_certifyme'),
+        ]
+    ));
+
+    // verify_code — required only when verify_mode is not "None"
+    $settings->add(new admin_setting_configtext(
+        'local_certifyme/verify_code',
+        get_string('verify_code', 'local_certifyme'),
+        get_string('verify_code_desc', 'local_certifyme'),
+        ''
+    ));
+
+    // license_number
+    $settings->add(new admin_setting_configtext(
+        'local_certifyme/license_number',
+        get_string('license_number', 'local_certifyme'),
+        get_string('license_number_desc', 'local_certifyme'),
+        ''
+    ));
+
+    // -------------------------------------------------------------------------
+    // CUSTOM FIELDS  (template-specific — one per line: FieldName=value)
+    // -------------------------------------------------------------------------
+
+    $settings->add(new admin_setting_configtextarea(
+        'local_certifyme/customfields',
+        get_string('customfields', 'local_certifyme'),
+        get_string('customfields_desc', 'local_certifyme'),
         ''
     ));
 }

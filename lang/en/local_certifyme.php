@@ -18,6 +18,34 @@ $string['apitoken']         = 'CertifyMe API Token';
 $string['apitoken_desc']    = 'Enter your CertifyMe API token from the CertifyMe dashboard.';
 $string['templateid']       = 'Credential Template ID';
 $string['templateid_desc']  = 'Enter the template ID of the credential to issue on course completion.';
+$string['text']              = 'Text';
+$string['text_desc']         = 'Optional text shown on the credential — e.g. a job title or organisation name (e.g. VP Quadralogics). Leave blank to send empty.';
+$string['verify_mode']          = 'Verification Mode';
+$string['verify_mode_desc']     = 'Select the verification method required by your CertifyMe template.';
+$string['verify_mode_none']     = 'None';
+$string['verify_mode_ssn']      = 'SSN';
+$string['verify_mode_code']     = 'Code';
+$string['verify_mode_passport'] = 'Passport Number';
+$string['verify_code']          = 'Verification Code';
+$string['verify_code_desc']     = 'Required when Verification Mode is not "None" (e.g. 13678AJKJY678JHGP0). Leave blank if not used.';
+$string['license_number']       = 'License Number';
+$string['license_number_desc']  = 'Optional license number to attach to the credential (e.g. TPR-1267Af23). Leave blank if not used.';
+$string['customfields']      = 'Custom Fields';
+$string['customfields_desc'] = 'Map your CertifyMe template custom fields to values. One entry per line in the format: FieldName=value
+
+"Custom." is added automatically — just enter the part after it.
+
+Available tokens for values:
+  {course_name}    — Moodle course name
+  {student_name}   — Student full name
+  {student_email}  — Student email
+  {date}           — Completion date (e.g. 13 May 2026)
+
+Example:
+  CourseName={course_name}
+  eventdate={date}
+  Organization=Acme University
+  Country=India';
 $string['privacy:metadata:certifyme_api']         = 'CertifyMe API';
 $string['privacy:metadata:certifyme_api:name']    = 'Student full name sent to CertifyMe';
 $string['privacy:metadata:certifyme_api:email']   = 'Student email sent to CertifyMe';
