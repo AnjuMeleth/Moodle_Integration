@@ -29,22 +29,22 @@ class servers {
             'apac' => [
                 'label'      => 'APAC  (https://apac.platform.certifyme.dev)',
                 'url'        => 'https://apac.platform.certifyme.dev/api/v2/credential',
-                'signup_url' => 'https://apac.platform.certifyme.dev/auth/register/',
+                'signup_url' => 'https://apac.platform.certifyme.dev/auth/pre-register/moodle@certifyme.online',
             ],
             'eu2' => [
                 'label'      => 'EU2   (https://eu2.certifyme.org)',
                 'url'        => 'https://eu2.certifyme.org/api/v2/credential',
-                'signup_url' => 'https://eu2.certifyme.org/auth/register/',
+                'signup_url' => 'https://eu2.certifyme.org/auth/pre-register/moodle@certifyme.online',
             ],
             'us1' => [
                 'label'      => 'US1   (https://us1.certifyme.org)',
                 'url'        => 'https://us1.certifyme.org/api/v2/credential',
-                'signup_url' => 'https://us1.certifyme.org/auth/register/',
+                'signup_url' => 'https://us1.certifyme.org/auth/pre-register/moodle@certifyme.online',
             ],
             'butterfly' => [
                 'label'      => 'Butterfly  (https://butterfly.certifyme.org)',
                 'url'        => 'https://butterfly.certifyme.org/api/v2/credential',
-                'signup_url' => 'https://butterfly.certifyme.org/auth/register/',
+                'signup_url' => 'https://butterfly.certifyme.org/auth/pre-register/moodle@certifyme.online',
             ],
             // ADD NEW SERVER HERE — nothing else needs to change:
             // 'asia2' => [
