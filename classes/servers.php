@@ -18,34 +18,39 @@ defined('MOODLE_INTERNAL') || die();
  * Single source of truth for all CertifyMe servers.
  *
  * TO ADD A NEW SERVER — only edit this file:
- *   'key' => ['label' => 'Display Name', 'url' => 'https://...certifyme.../api/v2/credential']
+ *   'key' => ['label' => '...', 'url' => 'https://...certifyme.../api/v2/credential', 'signup_url' => 'https://.../auth/register/']
  *
- * The settings dropdown and API routing both read from here automatically.
+ * The settings dropdown, API routing, and signup button all read from here automatically.
  */
 class servers {
 
     public static function all(): array {
         return [
             'apac' => [
-                'label' => 'APAC  (https://apac.platform.certifyme.dev)',
-                'url'   => 'https://apac.platform.certifyme.dev/api/v2/credential',
+                'label'      => 'APAC  (https://apac.platform.certifyme.dev)',
+                'url'        => 'https://apac.platform.certifyme.dev/api/v2/credential',
+                'signup_url' => 'https://apac.platform.certifyme.dev/auth/register/',
             ],
             'eu2' => [
-                'label' => 'EU2   (https://eu2.certifyme.org)',
-                'url'   => 'https://eu2.certifyme.org/api/v2/credential',
+                'label'      => 'EU2   (https://eu2.certifyme.org)',
+                'url'        => 'https://eu2.certifyme.org/api/v2/credential',
+                'signup_url' => 'https://eu2.certifyme.org/auth/register/',
             ],
             'us1' => [
-                'label' => 'US1   (https://us1.certifyme.org)',
-                'url'   => 'https://us1.certifyme.org/api/v2/credential',
+                'label'      => 'US1   (https://us1.certifyme.org)',
+                'url'        => 'https://us1.certifyme.org/api/v2/credential',
+                'signup_url' => 'https://us1.certifyme.org/auth/register/',
             ],
             'butterfly' => [
-                'label' => 'Butterfly  (https://butterfly.certifyme.org)',
-                'url'   => 'https://butterfly.certifyme.org/api/v2/credential',
+                'label'      => 'Butterfly  (https://butterfly.certifyme.org)',
+                'url'        => 'https://butterfly.certifyme.org/api/v2/credential',
+                'signup_url' => 'https://butterfly.certifyme.org/auth/register/',
             ],
             // ADD NEW SERVER HERE — nothing else needs to change:
             // 'asia2' => [
-            //     'label' => 'Asia2  (https://asia2.certifyme.org)',
-            //     'url'   => 'https://asia2.certifyme.org/api/v2/credential',
+            //     'label'      => 'Asia2  (https://asia2.certifyme.org)',
+            //     'url'        => 'https://asia2.certifyme.org/api/v2/credential',
+            //     'signup_url' => 'https://asia2.certifyme.org/auth/register/',
             // ],
         ];
     }
@@ -57,6 +62,16 @@ class servers {
     public static function endpoint(string $key): string {
         $servers = self::all();
         return $servers[$key]['url'] ?? $servers['apac']['url'];
+    }
+
+    public static function signup_url(string $key): string {
+        $servers = self::all();
+        return $servers[$key]['signup_url'] ?? $servers['apac']['signup_url'];
+    }
+
+    /** Returns a JSON object mapping server key → signup_url, for use in JavaScript. */
+    public static function signup_urls_json(): string {
+        return json_encode(array_map(fn($s) => $s['signup_url'], self::all()));
     }
 
     public static function default_key(): string {

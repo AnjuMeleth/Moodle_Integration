@@ -31,6 +31,52 @@ if ($hassiteconfig) {
         \local_certifyme\servers::dropdown()
     ));
 
+    // Sign-up button — resolves to the currently-selected server's /auth/register/ URL.
+    $settings->add(new class(
+        'local_certifyme/signup_info',
+        get_string('signup_heading', 'local_certifyme'),
+        get_string('signup_desc', 'local_certifyme'),
+        ''
+    ) extends admin_setting {
+        public function get_setting() {
+            return true;
+        }
+        public function write_setting($data) {
+            return '';
+        }
+        public function output_html($data, $query = '') {
+            $currentkey  = get_config('local_certifyme', 'server') ?: \local_certifyme\servers::default_key();
+            $signupurl   = \local_certifyme\servers::signup_url($currentkey);
+            $allurls     = \local_certifyme\servers::signup_urls_json();
+            $heading     = $this->visiblename;
+            $description = $this->description;
+
+            $html  = '<div class="form-item row">';
+            $html .= '<div class="form-label col-sm-4 col-form-label">';
+            $html .= '<label>' . s($heading) . '</label>';
+            $html .= '</div>';
+            $html .= '<div class="form-setting col-sm-8">';
+            $html .= '<p class="form-control-static">' . s($description) . '</p>';
+            $html .= '<a id="certifyme-signup-btn" href="' . s($signupurl) . '" target="_blank" rel="noopener noreferrer" '
+                   . 'class="btn btn-primary">'
+                   . get_string('signup_button', 'local_certifyme') . '</a>';
+            $html .= '</div>';
+            $html .= '</div>';
+            $html .= '<script>';
+            $html .= '(function(){';
+            $html .= 'var urls=' . $allurls . ';';
+            $html .= 'var sel=document.getElementById("id_s_local_certifyme_server");';
+            $html .= 'var btn=document.getElementById("certifyme-signup-btn");';
+            $html .= 'if(sel&&btn){';
+            $html .= 'sel.addEventListener("change",function(){if(urls[sel.value])btn.href=urls[sel.value];});';
+            $html .= '}';
+            $html .= '})();';
+            $html .= '</script>';
+
+            return $html;
+        }
+    });
+
     $settings->add(new admin_setting_configtext(
         'local_certifyme/apitoken',
         get_string('apitoken', 'local_certifyme'),

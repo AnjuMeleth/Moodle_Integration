@@ -12,6 +12,9 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname']       = 'CertifyMe';
+$string['signup_heading']   = 'New to CertifyMe?';
+$string['signup_desc']      = 'Don\'t have a CertifyMe account yet? Create one on your selected server — it\'s free to get started.';
+$string['signup_button']    = 'Sign Up on CertifyMe';
 $string['server']           = 'CertifyMe Server';
 $string['server_desc']      = 'Select the CertifyMe server your account is hosted on.';
 $string['apitoken']         = 'CertifyMe API Token';
