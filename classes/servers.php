@@ -69,9 +69,9 @@ class servers {
         return $servers[$key]['signup_url'] ?? $servers['apac']['signup_url'];
     }
 
-    /** Returns a JSON object mapping server key → signup_url, for use in JavaScript. */
-    public static function signup_urls_json(): string {
-        return json_encode(array_map(fn($s) => $s['signup_url'], self::all()));
+    /** Returns a PHP array mapping server key → signup_url, for use with js_call_amd. */
+    public static function signup_urls_array(): array {
+        return array_map(fn($s) => $s['signup_url'], self::all());
     }
 
     public static function default_key(): string {

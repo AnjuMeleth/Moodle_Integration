@@ -7,6 +7,7 @@
 // (at your option) any later version.
 //
 // @package    local_certifyme
+// @copyright  2026 CertifyMe (https://www.certifyme.online)
 // @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 
 defined('MOODLE_INTERNAL') || die();

@@ -45,35 +45,20 @@ if ($hassiteconfig) {
             return '';
         }
         public function output_html($data, $query = '') {
-            $currentkey  = get_config('local_certifyme', 'server') ?: \local_certifyme\servers::default_key();
-            $signupurl   = \local_certifyme\servers::signup_url($currentkey);
-            $allurls     = \local_certifyme\servers::signup_urls_json();
-            $heading     = $this->visiblename;
-            $description = $this->description;
+            global $OUTPUT, $PAGE;
 
-            $html  = '<div class="form-item row">';
-            $html .= '<div class="form-label col-sm-4 col-form-label">';
-            $html .= '<label>' . s($heading) . '</label>';
-            $html .= '</div>';
-            $html .= '<div class="form-setting col-sm-8">';
-            $html .= '<p class="form-control-static">' . s($description) . '</p>';
-            $html .= '<a id="certifyme-signup-btn" href="' . s($signupurl) . '" target="_blank" rel="noopener noreferrer" '
-                   . 'class="btn btn-primary">'
-                   . get_string('signup_button', 'local_certifyme') . '</a>';
-            $html .= '</div>';
-            $html .= '</div>';
-            $html .= '<script>';
-            $html .= '(function(){';
-            $html .= 'var urls=' . $allurls . ';';
-            $html .= 'var sel=document.getElementById("id_s_local_certifyme_server");';
-            $html .= 'var btn=document.getElementById("certifyme-signup-btn");';
-            $html .= 'if(sel&&btn){';
-            $html .= 'sel.addEventListener("change",function(){if(urls[sel.value])btn.href=urls[sel.value];});';
-            $html .= '}';
-            $html .= '})();';
-            $html .= '</script>';
+            $currentkey = get_config('local_certifyme', 'server') ?: \local_certifyme\servers::default_key();
+            $signupurl  = \local_certifyme\servers::signup_url($currentkey);
+            $allurls    = \local_certifyme\servers::signup_urls_array();
 
-            return $html;
+            $PAGE->requires->js_call_amd('local_certifyme/signup_button', 'init', [$allurls]);
+
+            return $OUTPUT->render_from_template('local_certifyme/signup_button', [
+                'heading'     => $this->visiblename,
+                'description' => $this->description,
+                'signupurl'   => $signupurl,
+                'buttonlabel' => get_string('signup_button', 'local_certifyme'),
+            ]);
         }
     });
 
