@@ -1,4 +1,4 @@
-# CertifyMe — Moodle Local Plugin
+# CertifyMe — Moodle Local Plugin 
 
 Automatically issues a CertifyMe digital credential when a student completes a Moodle course.
 
